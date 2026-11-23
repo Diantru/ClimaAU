@@ -1,3 +1,24 @@
+# ClimaAU
+
+Dashboard para explorar observaciones meteorológicas de estaciones de Australia.
+
+## Dashboard del Sprint 2
+
+La interfaz usa React, TypeScript, Vite y Material UI. Requiere Node.js 22.13 o superior y pnpm 11.
+
+```sh
+pnpm install --frozen-lockfile
+pnpm dev
+```
+
+Abre la dirección que imprime Vite. Ejecuta `pnpm check` para verificar los tipos y `pnpm build` para generar la compilación de producción.
+
+- `src/pages/DashboardPage.tsx` mantiene el estado de la navegación y de los filtros. También prepara los datos que reciben los componentes visuales.
+- `src/components/` contiene el encabezado, la navegación, los filtros, las tarjetas, los gráficos y la tabla.
+- `src/data/` contiene la muestra y las funciones para calcular los indicadores y exportar la selección a CSV.
+
+La muestra contiene 600 observaciones de WeatherAUS. Incluye cinco fechas por mes de 2015 y 2016 para Sydney, Melbourne, Brisbane, Perth y Adelaide. Los totales y promedios del dashboard se calculan sobre esa muestra. La exportación incluye las observaciones de la estación y el periodo seleccionados.
+
 # Transformación de datos CSV a JSON
 
 El script `convertir_csv.py` convierte el archivo de [Rain in Australia en Kaggle](https://www.kaggle.com/datasets/jsphyg/weather-dataset-rattle-package) en un arreglo JSON con un objeto por observación. Conserva los nombres y el orden de las columnas del CSV.
