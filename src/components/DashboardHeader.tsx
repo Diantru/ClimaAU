@@ -5,9 +5,10 @@ interface DashboardHeaderProps {
   title: string;
   description: string;
   onExport: () => void;
+  exportDisabled: boolean;
 }
 
-export function DashboardHeader({ title, description, onExport }: DashboardHeaderProps) {
+export function DashboardHeader({ title, description, onExport, exportDisabled }: DashboardHeaderProps) {
   return (
     <Stack component="header" direction="row" spacing={1.5} sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
       <Box sx={{ minWidth: 0 }}>
@@ -25,6 +26,7 @@ export function DashboardHeader({ title, description, onExport }: DashboardHeade
         variant="contained"
         aria-label="Exportar datos"
         onClick={onExport}
+        disabled={exportDisabled}
         sx={{
           flexShrink: 0,
           gap: 1,

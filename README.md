@@ -2,12 +2,19 @@
 
 Dashboard para explorar observaciones meteorológicas de estaciones de Australia.
 
-## Dashboard del Sprint 2
+## Dashboard con Firebase Realtime Database
 
 La interfaz usa React, TypeScript, Vite y Material UI. Requiere Node.js 22.13 o superior y pnpm 11.
 
 ```sh
 pnpm install --frozen-lockfile
+```
+
+El archivo `.env` apunta a la instancia de ClimaAU. Para usar otra instancia, copia `.env.example` como `.env.local` y define `VITE_FIREBASE_DATABASE_URL` con la URL que aparece en Firebase Realtime Database.
+
+En una instancia nueva, importa `weatherAUS.json` en el nodo `/weather` y publica el contenido de `database.rules.json` en la pestaña **Reglas**. Si importas desde la raíz, el archivo debe contener el arreglo original dentro de una propiedad `weather`. Las reglas permiten consultar el conjunto meteorológico, bloquean las escrituras desde el cliente e indexan `Date`.
+
+```sh
 pnpm dev
 ```
 
@@ -15,9 +22,9 @@ Abre la dirección que imprime Vite. Ejecuta `pnpm check` para verificar los tip
 
 - `src/pages/DashboardPage.tsx` mantiene el estado de la navegación y de los filtros. También prepara los datos que reciben los componentes visuales.
 - `src/components/` contiene el encabezado, la navegación, los filtros, las tarjetas, los gráficos y la tabla.
-- `src/data/` contiene la muestra y las funciones para calcular los indicadores y exportar la selección a CSV.
+- `src/data/firebase.ts` inicializa el SDK de Firebase y `src/data/weatherRepository.ts` consulta las observaciones por año. `src/data/useWeatherObservations.ts` coordina la carga, el resultado y los errores en React.
 
-La muestra contiene 600 observaciones de WeatherAUS. Incluye cinco fechas por mes de 2015 y 2016 para Sydney, Melbourne, Brisbane, Perth y Adelaide. Los totales y promedios del dashboard se calculan sobre esa muestra. La exportación incluye las observaciones de la estación y el periodo seleccionados.
+Firebase almacena las 145 460 observaciones de WeatherAUS. Cuando Realtime Database omite campos con valor `null`, la aplicación interpreta esas mediciones ausentes como valores nulos. Los filtros del dashboard ofrecen 2015 y 2016 para Sydney, Melbourne, Brisbane, Perth y Adelaide. Los indicadores y el CSV usan todos los registros disponibles de la estación y el año seleccionados. La tabla muestra los ocho registros más recientes de esa selección.
 
 # Transformación de datos CSV a JSON
 

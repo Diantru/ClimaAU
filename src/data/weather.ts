@@ -1,7 +1,4 @@
 import type { MonthlyPoint, Observation, Option, WindSegment } from '../types'
-import sample from './weather-sample.json'
-
-export const observations: readonly Observation[] = sample
 
 export const stationOptions: Option[] = [
   { value: 'sydney', label: 'Sydney' },

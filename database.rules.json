@@ -1,0 +1,10 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "weather": {
+      ".read": true,
+      ".indexOn": ["Date"]
+    }
+  }
+}
